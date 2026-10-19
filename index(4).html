@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quintlab - by Ibrahim Elgamal</title>
+<link rel="icon" href="assets/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1c30;--plum:#4a3555;--orange:#f47b20;--green:#39ff14;--bg:#fffdf5;--ink:#1a2434}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9}
+/* Intro */
+#intro{position:fixed;inset:0;z-index:100;background:linear-gradient(135deg,var(--navy),var(--plum) 60%,var(--orange));display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;direction:ltr;transition:opacity .8s,visibility .8s}
+#intro.hide{opacity:0;visibility:hidden}
+#intro .logo{width:min(220px,50vw);background:#fff;border-radius:24px;padding:14px;opacity:0;transform:scale(.4) rotate(-12deg);animation:pop 1.2s .3s forwards cubic-bezier(.2,1.4,.4,1)}
+#intro h1{font-size:clamp(1.8rem,6vw,3.4rem);margin-top:26px;font-weight:900;opacity:0;animation:rise .9s 1.5s forwards}
+#intro h1 span{color:var(--green)}
+#intro p{font-size:clamp(1rem,3vw,1.5rem);opacity:0;animation:rise .9s 2.3s forwards;letter-spacing:1px}
+#intro .bar{position:absolute;bottom:0;left:0;height:6px;background:var(--green);width:0;animation:load 4.6s linear forwards}
+#skip{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.15);color:#fff;border:1px solid #fff6;border-radius:20px;padding:6px 16px;cursor:pointer;font-family:inherit}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes load{to{width:100%}}
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:8px 5vw;border-bottom:3px solid var(--orange)}
+nav .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;text-decoration:none;direction:ltr}
+nav .brand img{height:38px;background:#fff;border-radius:8px;padding:2px}
+nav ul{display:flex;gap:6px;list-style:none;flex-wrap:wrap}
+nav a.l{color:#fff;text-decoration:none;padding:6px 14px;border-radius:20px;font-size:.95rem;transition:.2s}
+nav a.l:hover,nav a.l.home{background:var(--orange)}
+/* Hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;background:linear-gradient(100deg,rgba(11,28,48,.92),rgba(11,28,48,.55)),url(assets/bridge.jpg) center/cover}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:90px;background:linear-gradient(90deg,var(--navy),var(--orange));clip-path:path('M0 90 C300 0 600 120 1000 40 S1800 20 2400 60 L2400 90Z');opacity:.95}
+.hero .in{padding:60px 6vw 120px;max-width:900px}
+.hero small{color:var(--green);font-weight:700}
+.hero h1{font-size:clamp(2rem,6vw,4rem);line-height:1.4;font-weight:900;color:var(--orange);margin:8px 0 20px;text-shadow:0 2px 12px #0006}
+.hero .meta{font-size:1.25rem;font-weight:600}
+.hero .meta b{color:var(--orange)}
+.hero .src{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:9px 20px;border-radius:26px;text-decoration:none;font-weight:700;font-size:.95rem;border:2px solid var(--orange);color:#fff;transition:.2s}
+.btn.fill{background:var(--orange)}
+.btn:hover{background:var(--green);border-color:var(--green);color:var(--navy)}
+/* Sections */
+section.s{padding:70px 6vw;max-width:1100px;margin:auto}
+h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--orange);font-weight:900;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+h2:before{content:"";width:8px;height:34px;background:var(--navy);border-radius:4px}
+p{margin-bottom:14px;font-size:1.08rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:#fff;border-radius:18px;border:2px solid var(--navy);border-top:6px solid var(--orange);padding:20px;box-shadow:0 8px 22px #0b1c3014}
+.card h3{color:var(--navy);margin-bottom:6px}
+.card p{font-size:1rem;margin:0}
+.num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;margin-left:8px}
+.callout{background:var(--navy);color:#fff;border-radius:18px;padding:24px;margin-top:26px;border-right:8px solid var(--green)}
+.method{background:#fff;border-radius:20px;padding:28px;margin-bottom:28px;box-shadow:0 8px 24px #0b1c3014;border-right:8px solid var(--orange)}
+.method h3{font-size:1.5rem;color:var(--navy);margin-bottom:10px}
+.method h4{color:var(--orange);margin:14px 0 4px}
+.method ul{padding-right:22px}
+.method li{margin-bottom:6px}
+footer{background:linear-gradient(90deg,var(--navy),var(--plum),var(--orange));color:#fff;text-align:center;padding:36px 5vw}
+footer img{height:70px;background:#fff;border-radius:14px;padding:6px;margin-bottom:10px}
+footer p{margin:2px 0;font-size:.95rem}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <button id="skip">Skip ›</button>
+  <img class="logo" src="assets/logo.png" alt="Quintlab logo">
+  <h1>Welcome to <span>Quintlab</span></h1>
+  <p>generated by Eng.Ibrahim Elgamal</p>
+  <div class="bar"></div>
+</div>
+
+<nav>
+  <a class="brand" href="https://ibrhaim-elgamal.github.io/Quintlab/"><img src="assets/logo.png" alt=""><span>Quintlab</span></a>
+  <ul>
+    <li><a class="l home" href="https://ibrhaim-elgamal.github.io/Quintlab/">الرئيسية</a></li>
+    <li><a class="l" href="#intro-sec">مقدمة</a></li>
+    <li><a class="l" href="#types">المنشآت</a></li>
+    <li><a class="l" href="#challenges">التحديات</a></li>
+    <li><a class="l" href="#methods">الطرق</a></li>
+    <li><a class="l" href="assets/report.pdf" download>تحميل PDF</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="in">
+    <small>المعهد العالي للهندسة والتكنولوجيا بالمنوفية — قسم الهندسة المدنية</small>
+    <h1>الطرق المستخدمة لصب الخرسانة تحت الماء</h1>
+    <p class="meta">إعداد: <b>إبراهيم محمد الجمل</b><br>إشراف: <b>د/آية الريفي</b></p>
+    <div class="src">
+      <a class="btn fill" href="https://library.sfic-yemen.org/files/original/b522fc5e2f7e6fa38dd34a18ec032aa5.pdf" target="_blank" rel="noopener">رابط المصدر</a>
+      <a class="btn" href="assets/report.pdf" download>تحميل التقرير PDF</a>
+    </div>
+  </div>
+</header>
+
+<section class="s" id="intro-sec">
+  <h2>مقدمة</h2>
+  <p>تُعد أعمال صب الخرسانة تحت الماء من أهم وأدق العمليات الهندسية التي تتطلب مهارة عالية ودقة كبيرة في التنفيذ، حيث تهدف إلى بناء القواعد والأساسات للمنشآت المائية مثل الجسور، والموانئ، والسدود، ومنصات استخراج النفط البحرية. وتنبع صعوبة هذه الأعمال من بيئة العمل غير المستقرة بطبيعتها، والتي تواجه تحديات مستمرة نتيجة حركة المياه، والتيارات البحرية، وضغط السوائل الذي يحيط بموقع الصب من كل اتجاه.</p>
+  <p>ولضمان نجاح هذه العملية والحصول على هيكل خرساني قوي ومتين، لا يمكن صب الخرسانة العادية بنفس الطريقة التقليدية المتبعة على اليابسة. والسبب في ذلك هو أن صب الخرسانة مباشرة في الماء يؤدي إلى جرف مكوناتها الأساسية وفصل الأسمنت عن الركام، مما يضعفها بشدة ويجعلها عاجزة عن تحمل الأوزان المطلوبة. لهذا السبب، يبتكر المهندسون طرقاً وأساليب خاصة تمنع اختلاط الخرسانة الطازجة بالمياه أثناء نقلها إلى القاع.</p>
+  <p>تعتمد عمليات صب الخرسانة تحت الماء على خلطات خرسانية مصممة خصيصاً لتتحمل الظروف المائية، حيث تتميز بزيادة نسبة الأسمنت ومواد رابطة تمنع تفككها، بالإضافة إلى استخدام إضافات خاصة تحسن من لزوجتها وسهولة تدفقها. ومع الالتزام بالخطوات الهندسية الصحيحة، تنجح هذه المشاريع في إقامة منشآت مائية صلبة وعالية الجودة تخدم المجتمعات وتصمد لعقود طويلة في وجه أقوى التيارات الطبيعية.</p>
+</section>
+
+<section class="s" id="types">
+  <h2>أنواع المنشآت التي تحتاج إلى صب تحت الماء</h2>
+  <div class="grid">
+    <div class="card"><h3>ركائز وقواعد الجسور</h3><p>الأعمدة والأساسات العملاقة التي تُبنى في قاع الأنهار أو الخلجان لحمل أجسام الجسور والكباري التي تربط بين الضفتين، وتحتاج لصب ضخم يتحمل الأوزان الهائلة وحركة المرور وصدمات المياه.</p></div>
+    <div class="card"><h3>منصات استخراج النفط والغاز البحرية</h3><p>الهياكل الضخمة التي يتم تثبيتها في أعماق البحار والمحيطات، وتعتمد في ثباتها على قواعد خرسانية مجوفة ومغمورة تمُلأ بالخرسانة لتقاوم أعنف الأمواج والرياح العاتية.</p></div>
+    <div class="card"><h3>السدود</h3><p>منشآت تمتد إلى أعماق كبيرة تحت مجرى النهر لمنع تسرب المياه من تحت السد وتحمل الضغط الهائل لملايين الأمتار المكعبات من المياه المخزنة.</p></div>
+    <div class="card"><h3>الأرصفة البحرية والموانئ</h3><p>المنشآت التي تُنشأ لاستقبال السفن التجارية العملاقة وتتطلب أساسات عميقة وصلبة في قاع البحر لتتحمل أوزان البضائع والرافعات الثقيلة.</p></div>
+  </div>
+</section>
+
+<section class="s" id="challenges">
+  <h2>التحديات الطبيعية والبيئية التي تواجه الصب تحت الماء</h2>
+  <div class="grid">
+    <div class="card"><h3><span class="num">1</span>حركة المياه</h3><p>تُعتبر حركة المياه والتيارات البحرية المستمرة من أشد العوامل خطورة عند صب الخرسانة الطازجة؛ إذ تؤدي إلى جرف المادة الإسمنتية الرابطة وفصل حبات الركام عن العجينة، مما يسبب ما يُعرف بالانفصال الحبيبي، وينتج عنه خرسانة ضعيفة مليئة بالفراغات والمسام وتقل قدرتها على تحمل الأحمال بشكل كبير.</p></div>
+    <div class="card"><h3><span class="num">2</span>ضغط المياه المرتفع في الأعماق</h3><p>هو الضغط الناتج عن وزن عمود الماء والذي يزداد كلما زاد العمق، حيث يُشكل قوة معاكسة تُقاوم خروج الخرسانة من الأنابيب وتدفقها، مما يتطلب استخدام خلطات ذات وزن نوعي عالٍ ومضخات قوية للتغلب عليه وضمان استقرار الصب.</p></div>
+    <div class="card"><h3><span class="num">3</span>الظروف الكيميائية والملوحة</h3><p>تُعبر عن احتواء مياه البحار على نسب عالية من الأملاح والكلوريدات التي تهاجم الخرسانة الطازجة وتخترق مسامها، مما قد يؤدي إلى تآكل حديد التسليح وتلف الهيكل الإنشائي، وهو ما يتطلب استخدام إسمنت مقاوم وإضافات لمنع النفاذية.</p></div>
+  </div>
+  <div class="callout">
+    <h3>مفهوم صب الخرسانة تحت الماء</h3>
+    <p>يعتمد مفهوم الصب تحت الماء بشكل أساسي على وضع الخرسانة في موقعها المحدد دون أن تتعرض للتلامس المباشر مع المياه المحيطة، وذلك لحمايتها من الانفصال والتلف أثناء عملية التنفيذ. ولتحقيق ذلك بطريقة آمنة وفعالة، يتوفر العديد من الطرق والأساليب الهندسية التي تضمن وصول الخرسانة إلى القاع بكامل قوتها وتماسكها.</p>
+  </div>
+</section>
+
+<section class="s" id="methods">
+  <h2>طرق صب الخرسانة تحت الماء للأساسات العميقة</h2>
+
+  <div class="method">
+    <h3><span class="num">1</span>أنبوب التريمي (الأنبوب الرأسي)</h3>
+    <p>تُعد طريقة الأنبوب الرأسي (التريمي) من أكثر الأساليب الهندسية كفاءة واعتمادية لصب الخرسانة المغمورة تحت الماء، خاصة في المنشآت العميقة مثل قواعد الكباري، الحوازيق البحرية، وحوائط قفص التثبيت. تُحقّق هذه الطريقة المبدأ الأساسي للصب المغمور بإنشاء نظام ينقل الخرسانة مباشرة إلى القاع دون أي احتكاك أو تلامس مباشر مع المياه المحيطة.</p>
+    <p>يتكون النظام من قمع علوي (قادوس) لتلقي الخرسانة، يتصل بأنابيب معدنية رأسية محكمة الإغلاق يتراوح قطرها عادة بين 10 إلى 15 سم.</p>
+    <h4>طريقة التنفيذ</h4>
+    <ul>
+      <li><b>تثبيت وتنزيل الأنبوب:</b> يُنزل أنبوب التريمي رأسياً في موقع الصب حتى يلامس القاع تماماً.</li>
+      <li><b>عزل الأنبوب:</b> في البداية لمنع دخول الماء داخل الأنبوب عند بدء صب أول دفعة، يتم وضع سدادة مؤقتة داخل الأنبوب قبل ضخ الخرسانة.</li>
+      <li><b>الضخ والتدفق التلقائي:</b> تُصب الخرسانة في القادوس العلوي لتنزل بفعل الجاذبية والوزن النوعي العالي للخلطة.</li>
+      <li>مع تراكم الخرسانة في القاع، يُرفع أنبوب التريمي ببطء وحذر شديد بواسطة ونش أو رافعة هيدروليكية، مع مراعاة ألا يقل عمق الجزء المغمور من الأنبوب داخل الخرسانة الطازجة عن 1.5 إلى 3 أمتار طوال فترة الصب.</li>
+    </ul>
+    <h4>الاحتياطات الواجب مراعاتها</h4>
+    <ul>
+      <li><b>استمرارية الصب:</b> يجب أن تتم عملية الصب بشكل متواصل ودون انقطاع لأن أي توقف قد يؤدي إلى بدء شك الخرسانة وتصلدها داخل الأنبوب أو حوله، مما يسبب انسداد النظام.</li>
+      <li><b>إزالة الطبقة الضعيفة:</b> في نهاية عملية الصب، تطفو طبقة رقيقة زبدية ضعيفة الناتجة عن احتكاك الخرسانة بالماء على السطح العلوي للكتلة، ويجب تكشير هذه الطبقة وإزالتها تماماً بعد التصلد للوصول إلى الخرسانة السليمة قبل استكمال المنشأ.</li>
+    </ul>
+  </div>
+
+  <div class="method">
+    <h3><span class="num">2</span>الركام المحقون (Pre-placed Aggregate)</h3>
+    <p>تعتمد هذه الطريقة على فصل مراحل التنفيذ؛ فلا يتم صب الخرسانة جاهزة ومخلوطة معاً، بل يتم أولاً ملء الشدات أو الفرم بالركام الكبير، وبعد وضع الركام في الشدات، يتم حقن الأسمنت اللباني من خلال أنابيب خاصة تمتد وصولاً إلى قاع الفرم ويتدفق الأسمنت اللباني من الأسفل إلى الأعلى، حيث يقوم بدفع المياه الموجودة إلى خارج الفرم ويحل محلها تدريجياً، ليمتلئ بالكامل ويغطي الفراغات بين حبيبات الركام ليتصلب ويشكل الكتلة الخرسانية.</p>
+    <h4>الاحتياطات الواجب مراعاتها</h4>
+    <ul>
+      <li>يجب أن يكون الركام الكبير المستخدم نظيفاً وخالياً من الأتربة أو الطمي أو الشوائب العضوية لأن وجود هذه العوائق يمنع التماسك الجيد مع المونة الأسمنتية، ومراعاة وجود تدرج حبيبي جيد ومناسب.</li>
+      <li>يجب أن تُصمم الشدات البحرية وتُغلق بإحكام شديد لمنع أي تسرب للمونة الأسمنتية إلى خارج الفرم تحت تأثير ضغط الحقن أو حركة المياه.</li>
+    </ul>
+  </div>
+
+  <div class="method">
+    <h3><span class="num">3</span>أكياس الخرسانة</h3>
+    <p>تعتمد هذه الطريقة على تعبئة خرسانة ذات قوام جاف داخل أكياس مسامية مصنوعة عادةً من قماش الجوت بحيث تتسع الكيس الواحد لحوالي متر مكعب تقريباً ويتم ربطه بإحكام. الفكرة هنا تكمن في احتواء الخرسانة داخل أكياس تمنع غسلها أو تشتت مكوناتها بفعل مياه البحر أو التيارات المائية أثناء إنزالها، مما يتيح لها التماسك والاستمرار في التصلد تحت الماء.</p>
+    <h4>التنفيذ</h4>
+    <ul>
+      <li><b>تجهيز المكونات والتعبئة:</b> يتم تحضير خرسانة ذات قوام جاف نسبياً وتعبئتها داخل أكياس الجوت بسعات محددة (حوالي متر مكعب)، ثم تُربط فتحات الأكياس جيداً لضمان عدم تسرب المحتوى.</li>
+      <li><b>الإنزال والترصيص:</b> تُنقل الأكياس إلى موقع الصب وتُنزّل بعناية.</li>
+      <li><b>التداخل والترابط الإنشائي:</b> تُرص الأكياس في موقع الصب على هيئة صفوف مترابطة ومتداخلة تماماً مثل طريقة بناء الحوائط والطوب، بحيث تتداخل مع بعضها البعض لتقليل الفراغات.</li>
+      <li><b>النتيجة النهائية:</b> تتكاتف الأكياس وتتداخل معاً بمرور الوقت لتشكل في النهاية كتلة واحدة متماسكة ومتداخلة قادرة على أداء الغرض الإنشائي أو أعمال الحماية المطلوبة.</li>
+    </ul>
+    <h4>الاحتياطات الواجب مراعاتها</h4>
+    <ul>
+      <li><b>ضبط قوام الخرسانة:</b> التأكد من أن الخرسانة ذات قوام جاف بما يكفي لتجنب سيولة المكونات داخل الكيس، وفي نفس الوقت تسمح بامتصاص القدر اللازم من الرطوبة أو المياه للتصلد عبر مسام الأكياس.</li>
+      <li><b>إحكام ربط الأكياس:</b> ضرورة التأكد من ربط الأكياس وغلقها بإحكام تام لمنع فقدان أي أجزاء من الخرسانة أثناء النقل والإنزال تحت الماء.</li>
+      <li><b>انتظام وتناسق الرص:</b> يجب أن يتم رص الأكياس بدقة في صفوف منتظمة ومترابطة لتجنب حدوث انهيارات أو انزلاق للكتل المصنوعة، ولضمان تكون كتلة متجنسة وقوية.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/logo.png" alt="Quintlab">
+  <p><b>Quintlab - by Ibrahim Elgamal</b></p>
+  <p>المعهد العالي للهندسة والتكنولوجيا بالمنوفية — قسم الهندسة المدنية — مقرر تكنولوجيا صناعة الخرسانة</p>
+  <p>إعداد / إبراهيم محمد السيد محمد الجمل — الكود / 24004</p>
+</footer>
+
+<script>
+(function(){
+  var i=document.getElementById('intro');
+  function close(){i.classList.add('hide');document.body.style.overflow='';}
+  document.body.style.overflow='hidden';
+  document.getElementById('skip').onclick=close;
+  setTimeout(close,4800);
+})();
+</script>
+</body>
+</html>
